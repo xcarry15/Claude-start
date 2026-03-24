@@ -44,23 +44,23 @@
 ========================================
 
 最近使用:
-  [0] 进度追踪看板
+  [0]  MyProject-数据分析工具
 
 ----------------------------------------
   [Enter] 启动上次项目  [R] 恢复会话  [00] 退出
 ----------------------------------------
-   [1]  A-api.tstwg.cn
-   [2]  C-lat.tstwg.cn-经纬度计算工具
-   [3]  C-map.tstwg.cn-地图可视化
+   [1]  A-api-service
+   [2]  C-map-tool
+   [3]  D-data-analysis
    ...
 
-选择项目编号或输入关键字搜索: 地图
-搜索 "地图" 的结果:
-   [1]  C-map.tstwg.cn-地图可视化
+选择项目编号或输入关键字搜索: 数据
+搜索 "数据" 的结果:
+   [1]  D-data-analysis
    [0]  取消
 选择编号(Enter=0): 1
 
-当前: D:\...\C-map.tstwg.cn-地图可视化
+当前: /path/to/D-data-analysis
 
 子目录:
    [0]  使用当前目录
@@ -70,7 +70,7 @@
 选择编号(Enter=0): 0
 
 启动目录:
-   D:\...\C-map.tstwg.cn-地图可视化
+   /path/to/D-data-analysis
 
 ✓ 正在启动 Claude Code...
 ```
@@ -101,7 +101,7 @@ start-claude.bat
 编辑 `start-claude.bat` 第 7 行：
 
 ```batch
-set "ROOT_DIR=D:\你的项目目录"
+set "ROOT_DIR=C:\Your\Projects\Path"
 ```
 
 ### 默认项目扫描规则
@@ -111,16 +111,15 @@ set "ROOT_DIR=D:\你的项目目录"
 | 前缀 | 用途 |
 |------|------|
 | `A-xxx` | API 相关项目 |
-| `C-xxx` | 坐标/地图工具 |
+| `B-xxx` | 后端服务 |
+| `C-xxx` | 客户端/坐标工具 |
 | `D-xxx` | 数据分析 |
-| `G-xxx` | 高德 POI |
-| `P-xxx` | 行政区划数据 |
-| `S-xxx` | 统计分析 |
-| `T-xxx` | 业务工具 |
-| `Y-xxx` | Excel 处理 |
-| `Z-xxx` | 系统配置 |
+| `F-xxx` | 前端项目 |
+| `M-xxx` | 移动端 |
+| `T-xxx` | 工具类 |
+| `其他` | 自定义分类 |
 
-> 目录名示例：`T-2026.tstwg.cn-进度追踪看板`
+> 目录名示例：`F-react-admin-system`、`D-python-data-analysis`
 
 ---
 
@@ -191,13 +190,12 @@ set "ROOT_DIR=D:\你的项目目录"
 ## 📁 项目结构
 
 ```
-Z-Claude/
-├── 1-Start/
-│   ├── start-claude.bat      # 主启动脚本
-│   ├── last_project.txt      # 上次项目记录
-│   ├── project_stats.txt     # 使用统计
-│   └── README.md             # 本文件
-└── CLAUDE.md                  # Claude Code 开发指南
+claude-project-launcher/
+├── start-claude.bat      # 主启动脚本
+├── last_project.txt      # 上次项目记录（自动生成）
+├── project_stats.txt     # 使用统计（自动生成）
+├── README.md             # 本文件
+└── LICENSE               # MIT 许可证
 ```
 
 ---
