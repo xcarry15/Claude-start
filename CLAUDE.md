@@ -9,11 +9,11 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## 核心文件
 
 - `start-claude.bat` - 主启动脚本（Windows Batch）
-- `last_project.txt` - 记录上次启动的目录路径
+- `last_project.txt` - 本地状态文件，记录上次启动的目录路径（已忽略版本控制）
 
 ## 启动流程
 
-1. 扫描 `D:\0_系统文件夹\桌面\web` 下以"英文-"开头的目录作为项目列表
+1. 扫描 `D:\0_系统文件夹\桌面\web` 下以"英文字母前缀 + 连字符"开头的目录作为项目列表，例如 `A-demo`、`Web-demo`
 2. 支持多级子目录导航（进入子文件夹或返回上级）
 3. 选择后保存路径到 `last_project.txt`
 4. 执行 `claude --dangerously-skip-permissions <path>` 启动
@@ -26,4 +26,4 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## 修改说明
 
-如需添加新项目，直接在 `D:\0_系统文件夹\桌面\web` 下创建以"英文-"开头的目录即可自动识别。
+如需添加新项目，直接在 `D:\0_系统文件夹\桌面\web` 下创建以"英文字母前缀 + 连字符"开头的目录即可自动识别。
