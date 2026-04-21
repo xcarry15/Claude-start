@@ -22,6 +22,8 @@ echo.
 echo Claude Project Launcher
 
 :select_project
+cls
+call :draw_header
 set "count=0"
 
 for /f "delims=" %%I in ('dir /b /ad') do (
@@ -31,7 +33,13 @@ for /f "delims=" %%I in ('dir /b /ad') do (
 )
 
 echo.
+call :draw_divider
+echo Root:
+echo   %ROOT_DIR%
+call :draw_divider
 if %count% equ 0 echo   No project directories found under %ROOT_DIR%
+echo.
+echo Actions:
 echo   [0]   %ROOT_DIR%
 echo   [00]  Exit
 if defined lastProjectPath echo   [R]   Last: %lastProjectPath%
@@ -64,8 +72,10 @@ pause
 goto :select_project
 
 :select_dir
-echo.
-echo Current: %currentDir%
+cls
+call :draw_header
+echo Current:
+echo   %currentDir%
 
 set "subCount=0"
 for /f "delims=" %%D in ('dir /b /ad "%currentDir%"') do (
@@ -80,6 +90,7 @@ if %subCount% equ 0 (
 )
 
 echo.
+call :draw_divider
 echo Subdirectories:
 echo   [Enter]  Use current directory
 for /l %%N in (1,1,%subCount%) do call :print_subdir %%N
@@ -153,8 +164,16 @@ if errorlevel 1 (
 )
 
 set "lastProjectPath=%finalPath%"
-claude --dangerously-skip-permissions "%finalPath%"
+pushd "%finalPath%" || (
+    echo Failed to access launch directory:
+    echo   %finalPath%
+    pause
+    goto :end
+)
+
+claude --dangerously-skip-permissions
 set "claudeExit=%ERRORLEVEL%"
+popd
 if not "%claudeExit%"=="0" (
     echo Claude exited with code %claudeExit%.
     pause
@@ -167,6 +186,16 @@ exit /b 0
 
 :print_subdir
 call echo   [%~1]    %%subdir[%~1]%%
+exit /b 0
+
+:draw_header
+echo ============================================================
+echo Claude Project Launcher
+echo ============================================================
+exit /b 0
+
+:draw_divider
+echo ------------------------------------------------------------
 exit /b 0
 
 :write_last_path
