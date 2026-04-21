@@ -82,8 +82,9 @@ if %subCount% equ 0 (
 echo.
 echo Subdirectories:
 echo   [Enter]  Use current directory
-echo   [B]      Back
 for /l %%N in (1,1,%subCount%) do call :print_subdir %%N
+echo.
+echo   [B]      Back
 echo.
 
 set "choice2="
